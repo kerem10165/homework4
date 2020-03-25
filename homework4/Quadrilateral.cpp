@@ -45,6 +45,65 @@ Quadrilateral::Quadrilateral(const Point& a, double width, double height, const 
 	isValid();
 }
 
+Quadrilateral::Quadrilateral(const Point& a, const Point& b, const Point& c, const Point& d, const Color& color)
+{
+	setA(a);
+	setB(b);
+	setC(c);
+	setD(d);
+
+	this->color = color;
+
+	isValid();
+}
+
+Quadrilateral::Quadrilateral(const array<Point, NUMBER_OF_CORNERS>& pts, const Color& color)
+{
+	setA(pts[0]);
+	setB(pts[1]);
+	setC(pts[2]);
+	setD(pts[3]);
+
+	this->color = color;
+
+	isValid();
+}
+
+Point Quadrilateral::getA() const noexcept
+{
+	return a;
+}
+
+Point Quadrilateral::getB() const noexcept
+{
+	return b;
+}
+
+Point Quadrilateral::getC() const noexcept
+{
+	return c;
+}
+
+Point Quadrilateral::getD() const noexcept
+{
+	return d;
+}
+
+Quadrilateral::Color Quadrilateral::getColor() const noexcept
+{
+	return color;
+}
+
+double Quadrilateral::getPerimeter() const noexcept
+{
+	double x = a.distanceTo(b);
+	double y = a.distanceTo(d);
+	double z = b.distanceTo(d);
+	double q = c.distanceTo(d);
+
+	return x+y+z+q;
+}
+
 bool Quadrilateral::isValid() const
 {
 	if (c.y >= d.y || b.y >= a.y)
@@ -52,21 +111,77 @@ bool Quadrilateral::isValid() const
 		throw invalid_argument("sartlarý saglamýyor");
 	}
 
-	double egim = (a.y - b.y) / (a.x - b.x);
 
-	int c_xkontrol = (c.y - a.y) / egim + a.x;
-
-	int d_xkontrol = (d.y - a.y) / egim + a.x;
-
-	if (c.x <= c_xkontrol)
+	else
 	{
-		throw invalid_argument("dortgen degildir");
-	}
+		if (a.x - b.x == 0)
+		{
+			if (c.x <= a.x || d.x <= a.x)
+			{
+				throw invalid_argument("dortgen degildir");
+			}
+		}
 
-	if (d.x <= d_xkontrol)
-	{
-		throw invalid_argument("dortgen degildir");
+		else
+		{
+			double egim = (a.y - b.y) / (a.x - b.x);
+
+			int c_xkontrol = (c.y - a.y) / egim + a.x;
+
+			int d_xkontrol = (d.y - a.y) / egim + a.x;
+
+			if (c.x <= c_xkontrol)
+			{
+				throw invalid_argument("dortgen degildir");
+			}
+
+			if (d.x <= d_xkontrol)
+			{
+				throw invalid_argument("dortgen degildir");
+			}
+		}
 	}
+	
+
+	return false;
+}
+
+bool Quadrilateral::setA(const Point& pt)
+{
+	a.x = pt.x;
+	a.y = pt.y;
+
+	isValid();
+
+	return false;
+}
+
+bool Quadrilateral::setB(const Point& pt)
+{
+	b.x = pt.x;
+	b.y = pt.y;
+
+	isValid();
+
+	return false;
+}
+
+bool Quadrilateral::setC(const Point& pt)
+{
+	c.x = pt.x;
+	c.y = pt.y;
+
+	isValid();
+
+	return false;
+}
+
+bool Quadrilateral::setD(const Point& pt)
+{
+	d.x = pt.x;
+	d.y = pt.y;
+
+	isValid();
 
 	return false;
 }
