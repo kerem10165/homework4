@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClCompile Include="HW04.cpp" />
     <ClCompile Include="Quadrilateral.cpp" />
+    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Point.h" />

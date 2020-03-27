@@ -21,6 +21,9 @@
     <ClCompile Include="Quadrilateral.cpp">
       <Filter>Kaynak Dosyalar</Filter>
     </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Kaynak Dosyalar</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Point.h">

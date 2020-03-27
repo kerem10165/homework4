@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include <vector>
+#include <map>
 
 #include "Point.h"
 using namespace std;
@@ -10,6 +11,12 @@ class Triangle
 public:
 	constexpr static int NUMBER_OF_CORNERS{ 3 };
 	enum class Color { PINK, RED, BLUE, WHITE, BLACK, GREEN };
+	const map<Triangle::Color, string> colorToStringMap = { {Triangle::Color::RED, "Red"},
+	{Triangle::Color::BLUE, "Blue"},
+	{Triangle::Color::WHITE, "White"},
+	{Triangle::Color::BLACK, "Black"},
+	{Triangle::Color::GREEN, "Green"}
+	};
 
 	// Constructor
 	Triangle(const Point & a = { 1, 0 }, const Point & b = { 0, 1 }, const Point & c = { 2, 1 }, const Color & color = Color::RED);

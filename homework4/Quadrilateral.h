@@ -48,6 +48,7 @@ public:
 	Color getColor() const noexcept;
 	string getColorAsString() const noexcept; 
 
+
 	// Dörtgenin çevresini hesaplar ve gönderir
 	double getPerimeter() const noexcept;
 
