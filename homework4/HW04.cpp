@@ -93,13 +93,35 @@ Eleman bulunamazsa -1 döndürülür.*/
 template<class T>
 int search(const vector<T> &v, const T & key)
 {
-	return 1;
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		if (key.getPerimeter() == v[i].getPerimeter() && key.getColor() == v[i].getColor())
+		{
+			return 1;
+		}
+	}
+	return -1;
 }
 
 
 template<class T>
 int sortByPerimeter(vector<T> &v)
 {
+	vector <T> a;
+
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		T* temp = &v[0];
+		for (size_t j = 0; j < v.size()-i; j++)
+		{
+			if (v[j].getPerimeter() > temp->getPerimeter())
+			{
+				temp = &v[j];
+			}
+		}
+		a.push_back(*temp);
+	}
+	v = a;
 	return 1;
 }
 
@@ -113,62 +135,78 @@ int main()
 	cout << p.coords[0] << " " << p.coords[1] << endl;
 
 	// Sample Quad and Triangle Objects
-	auto sampleQuad = Quadrilateral{ Point(4, 5), 20, 20 };
-	cout << "Color of Sample Quad:" << sampleQuad.getColorAsString() << endl;
-
-	auto sampleTriangle = Triangle{ Point(4, 5),  Point(9, 5),  Point(14, 15) };
-	cout << "Color of Sample Triangle:" << sampleTriangle.getColorAsString() << endl;
-
-
-	// Filling vectors randomly
-	auto vectorOfQuads = vector<Quadrilateral>{};
-	auto vectorOfTriangles = vector<Triangle>{};
-
-	fillTriangles(vectorOfTriangles);
-	fillQuads(vectorOfQuads);
-
-	// Search sample objects in the corresponding vectors
-	cout << "Searching a triangle...\n";
-	cout << sampleTriangle.printInfo() << endl;
-	if (auto idx = search(vectorOfTriangles, sampleTriangle) >= 0)
-		cout << "A similar object is found at index-" << idx << endl;
-	else cout << "No similar object can be found" << endl;
-
-	cout << "Searching a quadrilateral...\n";
-	cout << sampleQuad.printInfo() << endl;
-	if (auto idx = search(vectorOfQuads, sampleQuad) >= 0)
-		cout << "A similar object is found at index-" << idx << endl;
-	else cout << "No similar object can be found" << endl;
-
 	
-	// Add sample Triangle object to the vector and sort the vector
-	vectorOfTriangles.push_back(sampleTriangle);
-	sortByPerimeter(vectorOfTriangles);
+	try
+	{
+		auto sampleQuad = Quadrilateral{ Point(4, 5), 20, 20 };
+		cout << "Color of Sample Quad:" << sampleQuad.getColorAsString() << endl;
+
+		// Filling vectors randomly
+		auto vectorOfQuads = vector<Quadrilateral>{};
+		fillQuads(vectorOfQuads);
+
+		// Search sample objects in the corresponding vectors
+		cout << "Searching a quadrilateral...\n";
+		cout << sampleQuad.printInfo() << endl;
+		if (auto idx = search(vectorOfQuads, sampleQuad) >= 0)
+			cout << "A similar object is found at index-" << idx << endl;
+		else cout << "No similar object can be found" << endl;
+
+		// Add sample Quad object to the vector and sort the vector
+		vectorOfQuads.push_back(sampleQuad);
+		sortByPerimeter(vectorOfQuads);
+
+		// Search sample item again. Now, you must have a hit.
+		cout << "Searching a quadrilateral...\n";
+		cout << sampleQuad.printInfo() << endl;
+		if (auto idx = search(vectorOfQuads, sampleQuad) >= 0)
+			cout << "A similar object is found at index-" << idx << endl;
+		else cout << "No similar object can be found" << endl;
+
+	}
+	
+	catch (invalid_argument& ex)
+	{
+		cout << "Invalid triangle: " << ex.what() << endl;
+	}
+
+	try
+	{
+		auto sampleTriangle = Triangle{ Point(4, 5),  Point(9, 5),  Point(14, 15) };
+		cout << "Color of Sample Triangle:" << sampleTriangle.getColorAsString() << endl;
+
+		// Filling vectors randomly
+		auto vectorOfTriangles = vector<Triangle>{};
+		fillTriangles(vectorOfTriangles);
+
+		// Search sample objects in the corresponding vectors
+		cout << "Searching a triangle...\n";
+		cout << sampleTriangle.printInfo() << endl;
+		if (auto idx = search(vectorOfTriangles, sampleTriangle) >= 0)
+			cout << "A similar object is found at index-" << idx << endl;
+		else cout << "No similar object can be found" << endl;
+
+		// Add sample Triangle object to the vector and sort the vector
+		vectorOfTriangles.push_back(sampleTriangle);
+		sortByPerimeter(vectorOfTriangles);
 
 
-	// Search sample item again. Now, you must have a hit.
-	cout << "Searching a triangle...\n";
-	cout << sampleTriangle.printInfo() << endl;
-	if (auto idx = search(vectorOfTriangles, sampleTriangle) >= 0)
-		cout << "A similar object is found at index-" << idx << endl;
-	else cout << "No similar object can be found" << endl;
-
-
-
-	// Add sample Quad object to the vector and sort the vector
-	vectorOfQuads.push_back(sampleQuad);
-	sortByPerimeter(vectorOfQuads);
-
-	// Search sample item again. Now, you must have a hit.
-	cout << "Searching a quadrilateral...\n";
-	cout << sampleQuad.printInfo() << endl;
-	if (auto idx = search(vectorOfQuads, sampleQuad) >= 0)
-		cout << "A similar object is found at index-" << idx << endl;
-	else cout << "No similar object can be found" << endl;
+		// Search sample item again. Now, you must have a hit.
+		cout << "Searching a triangle...\n";
+		cout << sampleTriangle.printInfo() << endl;
+		if (auto idx = search(vectorOfTriangles, sampleTriangle) >= 0)
+			cout << "A similar object is found at index-" << idx << endl;
+		else cout << "No similar object can be found" << endl;
+	}
+	catch (invalid_argument& ex)
+	{
+		cout << "Invalid triangle: " << ex.what() << endl;
+	}
+	
 
 
 	// Invalid cases
-	/*try
+	try
 	{
 		auto invalidTriangle1 = Triangle{ Point{4, 0},  Point{9, 0},  Point{14, 0} };
 	}
@@ -222,7 +260,7 @@ int main()
 	catch (invalid_argument & ex)
 	{
 		cout << "Invalid Quad: " << ex.what() << endl;
-	}*/
+	}
 
 	return 0;
 }

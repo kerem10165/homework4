@@ -118,6 +118,11 @@ double Quadrilateral::getPerimeter() const noexcept
 	double z = b.distanceTo(d);
 	double q = c.distanceTo(d);
 
+	if (isValid() == false)
+	{
+		return 0;
+	}
+
 	return x+y+z+q;
 }
 
@@ -129,7 +134,8 @@ bool Quadrilateral::isValid() const
 */
 	if (c.y >= d.y || b.y >= a.y)
 	{
-		//throw invalid_argument("dortgen degildir veya verilen sartlar saglanmiyor");
+		throw invalid_argument("dortgen degildir veya verilen sartlar saglanmiyor");
+		return false;
 	}
 
 
@@ -140,6 +146,7 @@ bool Quadrilateral::isValid() const
 			if (c.x == a.x || d.x == a.x)//eðer kenarlar üst üste biniyorsa 
 			{
 				throw invalid_argument("dortgen degildir veya verilen sartlar saglanmiyor");
+				return false;
 			}
 		}
 
@@ -167,18 +174,20 @@ bool Quadrilateral::isValid() const
 
 			if (c.x <= c_xkontrol)
 			{
-				//throw invalid_argument("dortgen degildir");
+				throw invalid_argument("dortgen degildir");
+				return false;
 			}
 
 			if (d.x <= d_xkontrol)
 			{
-				//throw invalid_argument("dortgen degildir");
+				throw invalid_argument("dortgen degildir");
+				return false;
 			}
 		}
 	}
 	
 
-	return false;
+	return true;
 }
 
 //setter fonksiyonlar

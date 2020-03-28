@@ -94,6 +94,11 @@ double Triangle::getPerimeter() const noexcept
 	double y = a.distanceTo(c);
 	double z = b.distanceTo(c);
 
+	if (isValid() == false)
+	{
+		return 0;
+	}
+
 	return x+y+z;
 }
 
@@ -130,22 +135,26 @@ bool Triangle::isValid() const
 	if ( x > y+z || x < abs(y-z))
 	{
 		throw invalid_argument("ucgen degildir");
+		return false;
 	}
 
 	if ( y > x+z || y < abs(x-z))
 	{
 		throw invalid_argument("ucgen degildir");
+		return false;
 	}
 
 	if ((a.x == b.x && a.y == b.y) || (a.x == c.x && a.y == c.y) || (b.x == c.x && b.y == c.y))
 	{
 		throw invalid_argument("ucgen degildir");
+		return false;
 	}
 
 
 	if ( z > x+y || z < abs(x-y))
 	{
 		throw invalid_argument("ucgen degildir");
+		return false;
 	}
 
 	return true;
