@@ -11,7 +11,9 @@ class Triangle
 public:
 	constexpr static int NUMBER_OF_CORNERS{ 3 };
 	enum class Color { PINK, RED, BLUE, WHITE, BLACK, GREEN };
-	const map<Triangle::Color, string> colorToStringMap = { {Triangle::Color::RED, "Red"},
+	const map<Triangle::Color, string> colorToStringMap = { 
+	{Triangle::Color::PINK, "Pink"},
+	{Triangle::Color::RED, "Red"},
 	{Triangle::Color::BLUE, "Blue"},
 	{Triangle::Color::WHITE, "White"},
 	{Triangle::Color::BLACK, "Black"},

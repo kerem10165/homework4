@@ -2,6 +2,7 @@
 #include <vector>
 #include "Triangle.h"
 #include "Quadrilateral.h"
+#include <random>
 
 using namespace std;
 
@@ -11,7 +12,37 @@ using namespace std;
 */
 void fillTriangles(vector<Triangle> &v, int numberOfItems = 100)
 {
-	
+	const map<int,Triangle::Color> intToColorMap = {
+	{0,Triangle::Color::PINK},
+	{1,Triangle::Color::RED},
+	{2,Triangle::Color::BLUE},
+	{3,Triangle::Color::WHITE},
+	{4,Triangle::Color::BLACK},
+	{5,Triangle::Color::GREEN}
+	};
+
+	Point a;
+	Point b;
+	Point c;
+	random_device rd;
+	uniform_real_distribution<double> dagilim(0, 100);
+	mt19937 motor(rd());
+	uniform_int_distribution<int> dagilim1(0, 5);
+
+
+	for (size_t i = 0; i < numberOfItems; i++)
+	{
+		a.x = dagilim(motor);
+		a.y = dagilim(motor);
+		b.x = dagilim(motor);
+		b.y = dagilim(motor);
+		c.x = dagilim(motor);
+		c.y = dagilim(motor);
+
+		auto renk = intToColorMap.at(dagilim1(motor));
+
+		v.push_back(Triangle(a, b, c, renk));
+	}
 }
 
 // Rastgele olarak Quadrilateral nesneleri olusturur ve parametre olarak verilen vektore ekler.
@@ -20,7 +51,40 @@ void fillTriangles(vector<Triangle> &v, int numberOfItems = 100)
 */
 void fillQuads(vector<Quadrilateral> &v, int numberOfItems = 100)
 {
+	const map<int, Quadrilateral::Color> intToColorMap = {
+	{0,Quadrilateral::Color::RED},
+	{1,Quadrilateral::Color::BLUE},
+	{2,Quadrilateral::Color::WHITE},
+	{3,Quadrilateral::Color::BLACK},
+	{4,Quadrilateral::Color::GREEN}
+	};
 
+	Point a;
+	Point b;
+	Point c;
+	Point d;
+
+	random_device rd;
+	uniform_real_distribution<double> dagilim(0, 100);
+	mt19937 motor(rd());
+	uniform_int_distribution<int> dagilim1(0, 4);
+	
+
+	for (size_t i = 0; i < numberOfItems; i++)
+	{
+		a.x = dagilim(motor);
+		a.y = dagilim(motor);
+		b.x = dagilim(motor);
+		b.y = dagilim(motor);
+		c.x = dagilim(motor);
+		c.y = dagilim(motor);
+		d.x = dagilim(motor);
+		d.y = dagilim(motor);
+
+		Quadrilateral::Color renk = intToColorMap.at(dagilim1(motor));
+
+		v.push_back(Quadrilateral(a,b,c,d,renk));
+	}
 }
 
 
@@ -29,14 +93,14 @@ Eleman bulunamazsa -1 döndürülür.*/
 template<class T>
 int search(const vector<T> &v, const T & key)
 {
-
+	return 1;
 }
 
 
 template<class T>
 int sortByPerimeter(vector<T> &v)
 {
-
+	return 1;
 }
 
 int main()
@@ -104,7 +168,7 @@ int main()
 
 
 	// Invalid cases
-	try
+	/*try
 	{
 		auto invalidTriangle1 = Triangle{ Point{4, 0},  Point{9, 0},  Point{14, 0} };
 	}
@@ -158,7 +222,7 @@ int main()
 	catch (invalid_argument & ex)
 	{
 		cout << "Invalid Quad: " << ex.what() << endl;
-	}
+	}*/
 
 	return 0;
 }

@@ -15,7 +15,7 @@ a		d
 b		c
 
 */
-Quadrilateral::Quadrilateral(const Point& a = { 0,0 }, const Point& c = { -1,-1 }, const Color& color = Quadrilateral::Color::GREEN)
+Quadrilateral::Quadrilateral(const Point& a, const Point& c, const Color& color)
 {
 	pts[0].x = a.x;
 	pts[0].y = a.y;
@@ -35,7 +35,7 @@ Quadrilateral::Quadrilateral(const Point& a = { 0,0 }, const Point& c = { -1,-1 
 }
 
 //verilen uzunluk ve geniþliðe göre kenar ayarlamasý ve renk atamasý yapýldý
-Quadrilateral::Quadrilateral(const Point& a, double width, double height, const Color& color = Color::GREEN)
+Quadrilateral::Quadrilateral(const Point& a, double width, double height, const Color& color)
 {
 	pts[0].x = a.x;
 	pts[0].y = a.y;
@@ -129,7 +129,7 @@ bool Quadrilateral::isValid() const
 */
 	if (c.y >= d.y || b.y >= a.y)
 	{
-		throw invalid_argument("dortgen degildir veya verilen sartlar saglanmiyor");
+		//throw invalid_argument("dortgen degildir veya verilen sartlar saglanmiyor");
 	}
 
 
@@ -167,12 +167,12 @@ bool Quadrilateral::isValid() const
 
 			if (c.x <= c_xkontrol)
 			{
-				throw invalid_argument("dortgen degildir");
+				//throw invalid_argument("dortgen degildir");
 			}
 
 			if (d.x <= d_xkontrol)
 			{
-				throw invalid_argument("dortgen degildir");
+				//throw invalid_argument("dortgen degildir");
 			}
 		}
 	}
@@ -189,7 +189,7 @@ bool Quadrilateral::setA(const Point& pt)
 
 	isValid();
 
-	return false;
+	return true;
 }
 
 bool Quadrilateral::setB(const Point& pt)
@@ -199,7 +199,7 @@ bool Quadrilateral::setB(const Point& pt)
 
 	isValid();
 
-	return false;
+	return true;
 }
 
 bool Quadrilateral::setC(const Point& pt)
@@ -209,7 +209,7 @@ bool Quadrilateral::setC(const Point& pt)
 
 	isValid();
 
-	return false;
+	return true;
 }
 
 bool Quadrilateral::setD(const Point& pt)
@@ -219,7 +219,7 @@ bool Quadrilateral::setD(const Point& pt)
 
 	isValid();
 
-	return false;
+	return true;
 }
 
 double Quadrilateral::printInfo() const noexcept
