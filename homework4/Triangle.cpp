@@ -56,6 +56,8 @@ Triangle::Triangle(const array<Point, NUMBER_OF_CORNERS>& pts, const Color& colo
 	isValid();
 }
 
+//getter fonksiyonlar
+
 Point Triangle::getA() const noexcept
 {
 	return a;
@@ -69,4 +71,24 @@ Point Triangle::getB() const noexcept
 Point Triangle::getC() const noexcept
 {
 	return c;
+}
+
+Triangle::Color Triangle::getColor() const noexcept
+{
+	return color;
+}
+
+string Triangle::getColorAsString() const noexcept
+{
+	return colorToStringMap.at(color);
+}
+
+double Triangle::getPerimeter() const noexcept
+{
+	//kenar uzunluklarý hesaplandý
+	double x = a.distanceTo(b);
+	double y = a.distanceTo(c);
+	double z = b.distanceTo(c);
+
+	return x+y+z;
 }

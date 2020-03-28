@@ -129,7 +129,7 @@ bool Quadrilateral::isValid() const
 */
 	if (c.y >= d.y || b.y >= a.y)
 	{
-		throw invalid_argument("sartlarý saglamýyor");
+		throw invalid_argument("dortgen degildir veya verilen sartlar saglanmiyor");
 	}
 
 
@@ -137,12 +137,26 @@ bool Quadrilateral::isValid() const
 	{
 		if (a.x - b.x == 0)//eðim sýfýr olduðu için özel durum
 		{
-			if (c.x <= a.x || d.x <= a.x)
+			if (c.x == a.x || d.x == a.x)//eðer kenarlar üst üste biniyorsa 
 			{
 				throw invalid_argument("dortgen degildir veya verilen sartlar saglanmiyor");
 			}
 		}
 
+
+		/*
+		A		
+	
+	
+	D
+						bu koþul oluyorsa saðlanmýyor
+		C			
+				B
+		
+		
+		burada verilen koþul c ve d noktasýnýn ab kenarýnýn saðýnda olmasýdýr bu durumu hesaplamak için de ab doðrusunun denklemini bulup c ve d noktasýnýn bu doðrunun ayný y deðerlerinde saðýnda olduðunu kontrol etmek
+
+		*/
 		else
 		{
 			double egim = (a.y - b.y) / (a.x - b.x);
