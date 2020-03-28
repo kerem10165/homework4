@@ -24,6 +24,7 @@ public:
 	Triangle(const Point & a = { 1, 0 }, const Point & b = { 0, 1 }, const Point & c = { 2, 1 }, const Color & color = Color::RED);
 	Triangle(const vector<Point> & pts, const Color & color = Color::RED);
 	Triangle(const array<Point, NUMBER_OF_CORNERS> & pts, const Color & color = Color::RED);
+
 	
 	const Point & a = pts[0];
 	Point & b = pts[1];

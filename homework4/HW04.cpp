@@ -30,7 +30,7 @@ void fillTriangles(vector<Triangle> &v, int numberOfItems = 100)
 	uniform_int_distribution<int> dagilim1(0, 5);
 
 
-	for (size_t i = 0; i < numberOfItems; i++)
+	for (int i = 0; i < numberOfItems; i++)
 	{
 		a.x = dagilim(motor);
 		a.y = dagilim(motor);
@@ -70,7 +70,7 @@ void fillQuads(vector<Quadrilateral> &v, int numberOfItems = 100)
 	uniform_int_distribution<int> dagilim1(0, 4);
 	
 
-	for (size_t i = 0; i < numberOfItems; i++)
+	for (int i = 0; i < numberOfItems; i++)
 	{
 		a.x = dagilim(motor);
 		a.y = dagilim(motor);
@@ -121,7 +121,11 @@ int sortByPerimeter(vector<T> &v)
 		}
 		a.push_back(*temp);
 	}
+	
+	v.clear();
+	
 	v = a;
+
 	return 1;
 }
 
