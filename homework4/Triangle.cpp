@@ -77,6 +77,11 @@ Point Triangle::getC() const noexcept
 	return c;
 }
 
+int Triangle::getType()
+{
+	return 0;
+}
+
 Triangle::Color Triangle::getColor() const noexcept
 {
 	return color;
@@ -124,6 +129,12 @@ bool Triangle::setC(const Point& pt)
 	c.y = pt.y;
 	isValid();
 	return true;
+}
+
+bool Triangle::setColor(const Triangle::Color& color)
+{
+	this->color = color;
+	return false;
 }
 
 bool Triangle::isValid() const

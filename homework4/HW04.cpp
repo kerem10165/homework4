@@ -103,28 +103,57 @@ int search(const vector<T> &v, const T & key)
 	return -1;
 }
 
+template<class T>
+
+void change(T& degisken1,T &degisken2)
+{
+	degisken1.a.x = degisken2.a.x;
+	degisken1.a.y = degisken2.a.y;
+	degisken1.b.x = degisken2.b.x;
+	degisken1.b.y = degisken2.b.y;
+	degisken1.c.x = degisken2.c.x;
+	degisken1.c.y = degisken2.c.y;
+	if (degisken1.getType() == 1)
+	{
+		#define DORTGEN
+	}
+	else
+	{
+		#undef DORTGEN
+	}
+
+#ifdef DORTGEN
+	degisken1.d.x = degisken2.d.x;
+	degisken1.d.y = degisken2.d.y;
+#endif // DORTGEN
+
+
+	degisken1.setColor(degisken2.getColor());
+}
+
+
 
 template<class T>
 int sortByPerimeter(vector<T> &v)
 {
-	vector <T> a;
+	T temp;
+	double vJ_1,vJ;
 
 	for (size_t i = 0; i < v.size(); i++)
 	{
-		T* temp = &v[0];
-		for (size_t j = 0; j < v.size()-i; j++)
+		for (size_t j = 1; j < v.size()-i; j++)
 		{
-			if (v[j].getPerimeter() > temp->getPerimeter())
+			vJ_1 = v[j - 1].getPerimeter();
+			vJ = v[j].getPerimeter();
+			if (vJ_1 > vJ)
 			{
-				temp = &v[j];
+				change(temp, v[j]);
+				change(v[j], v[j - 1]);
+				change(v[j - 1], temp);
 			}
+			
 		}
-		a.push_back(*temp);
 	}
-	
-	v.clear();
-	
-	v = a;
 
 	return 1;
 }

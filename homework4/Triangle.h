@@ -34,6 +34,7 @@ public:
 	Point getA() const noexcept; 
 	Point getB() const noexcept; 
 	Point getC() const noexcept; 
+	int getType();
 
 	Color getColor() const noexcept;
 	string getColorAsString() const noexcept;
@@ -44,6 +45,7 @@ public:
 	bool setA(const Point & pt); 
 	bool setB(const Point & pt); 
 	bool setC(const Point & pt);
+	bool setColor(const Triangle::Color& color = Triangle::Color::GREEN);
 
 	/* Ucgen olup olmadýðýný kontrol eder.
 	 * Bu fonksiyonun tüm yapýcýlar ve setter fonksiyonlar içinde doðrudan/dolaylý olarak çaðrýlmasý zorunludur.

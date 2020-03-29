@@ -100,6 +100,11 @@ Point Quadrilateral::getD() const noexcept
 	return d;
 }
 
+int Quadrilateral::getType()
+{
+	return 1;
+}
+
 Quadrilateral::Color Quadrilateral::getColor() const noexcept
 {
 	return color;
@@ -111,7 +116,7 @@ string Quadrilateral::getColorAsString() const noexcept
 }
 
 //her bir kenarý hesaplayýp döndüren fonksiyon
-double Quadrilateral::getPerimeter() const noexcept
+double Quadrilateral::getPerimeter() const
 {
 	double x = a.distanceTo(b);
 	double y = a.distanceTo(d);
@@ -228,6 +233,12 @@ bool Quadrilateral::setD(const Point& pt)
 
 	isValid();
 
+	return true;
+}
+
+bool Quadrilateral::setColor(const Quadrilateral::Color& color)
+{
+	this->color = color;
 	return true;
 }
 

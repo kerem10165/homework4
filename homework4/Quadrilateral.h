@@ -44,6 +44,7 @@ public:
 	Point getB() const noexcept; 
 	Point getC() const noexcept; 
 	Point getD() const noexcept; 
+	int getType();
 
 	// Dörtgenin rengini string olarak dönderir
 	Color getColor() const noexcept;
@@ -51,7 +52,7 @@ public:
 
 
 	// Dörtgenin çevresini hesaplar ve gönderir
-	double getPerimeter() const noexcept;
+	double getPerimeter() const;
 
 
 	/* Dörtgen olup olmadýðýný kontrol eder.
@@ -66,6 +67,9 @@ public:
 	bool setB(const Point & pt); 
 	bool setC(const Point & pt); 
 	bool setD(const Point & pt); 
+	bool setColor(const Quadrilateral::Color& color);
+
+	
 
 	double printInfo() const noexcept;
 	// Ekrana þunu basar:
